@@ -162,3 +162,6 @@ agents.py
 collect_data.py
 documentation.txt
 number2text/prompt_log.txt
+/number2text/check_language
+/number2text/temp
+number2text/test.py
