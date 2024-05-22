@@ -9,8 +9,28 @@ _scales = [
     ("ming", "ming", "ming"),
     ("million", "million", "million"),
     ("milliard", "milliard", "milliard"),
-    # ...
+    ("trillion", "trillion", "trillion"),
+    ("kvadrillion", "kvadrillion", "kvadrillion"),
+    ("kvintilion", "kvintilion", "kvintilion"),
+    ("sekstilion", "sekstilion", "sekstilion"),
+    ("septilion", "septilion", "septilion"),
+    ("oktilion", "oktilion", "oktilion"),
+    ("nonilion", "nonilion", "nonilion"),
+    ("detsillion", "detsillion", "detsillion"),
 ]
+
+_fractions = {
+    2: 'yarim',
+    3: 'uchdan bir',
+    4: 'chorak',
+    5: 'beshdan bir',
+    6: 'oltidan bir',
+    7: 'yettidan bir',
+    8: 'sakkizdan bir',
+    9: 'to\'qqizdan bir',
+    10: 'o\'ndan bir',
+    # ...
+}
 
 def convert_less_than_thousand(number):
     if number < 10:
@@ -38,7 +58,22 @@ def get_scale(number, scale_index):
     else:
         return _scales[scale_index][1]
 
+def convert_fraction(numerator, denominator):
+    if numerator == 1:
+        return _fractions[denominator]
+    else:
+        return convert(numerator) + " " + _fractions[denominator]
+
 def convert(number):
+    if isinstance(number, float):
+        integer_part = int(number)
+        fraction_part = round(number - integer_part, 10)
+
+        integer_words = convert(integer_part)
+        fraction_words = convert_fraction(int(fraction_part * 10), 10)
+
+        return f"{integer_words} butun {fraction_words}"
+
     if number == 0:
         return "nol"
 

@@ -161,3 +161,4 @@ cython_debug/
 agents.py
 collect_data.py
 documentation.txt
+number2text/prompt_log.txt

@@ -25,7 +25,7 @@ print(convert_number_to_text(42,"uz"))
 print(convert_number_to_text(144,"uz"))
 print(convert_number_to_text(1244,"uz"))
 print(convert_number_to_text(54344,"uz"))
-print(convert_number_to_text(1423244,"uz"))
+print(convert_number_to_text(1423244.54,"uz"))
 
 
 

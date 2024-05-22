@@ -1,7 +1,21 @@
 _ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 _teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
 _tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
-_scales = ['', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion']
+_scales = ['', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion',
+           'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion', 'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion']
+
+_fractions = {
+    2: 'half',
+    3: 'third',
+    4: 'quarter',
+    5: 'fifth',
+    6: 'sixth',
+    7: 'seventh',
+    8: 'eighth',
+    9: 'ninth',
+    10: 'tenth',
+    # ...
+}
 
 def convert_less_than_hundred(number):
     if number < 10:
@@ -25,7 +39,22 @@ def convert_less_than_thousand(number):
         else:
             return _ones[hundreds] + ' hundred and ' + convert_less_than_hundred(less_than_hundred)
 
+def convert_fraction(numerator, denominator):
+    if numerator == 1:
+        return _fractions[denominator]
+    else:
+        return convert(numerator) + ' ' + _fractions[denominator] + ('s' if numerator > 1 else '')
+
 def convert(number):
+    if isinstance(number, float):
+        integer_part = int(number)
+        fraction_part = round(number - integer_part, 10)
+
+        integer_words = convert(integer_part)
+        fraction_words = convert_fraction(int(fraction_part * 10), 10)
+
+        return f"{integer_words} and {fraction_words}"
+
     if number == 0:
         return 'zero'
 

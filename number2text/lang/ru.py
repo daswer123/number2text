@@ -21,8 +21,26 @@ _scales = [
     ('миллион', 'миллиона', 'миллионов'),  # 10^6
     ('миллиард', 'миллиарда', 'миллиардов'), # 10^9
     ('триллион', 'триллиона', 'триллионов'), # 10^12
-    # ...
+    ('квадриллион', 'квадриллиона', 'квадриллионов'), # 10^15
+    ('квинтиллион', 'квинтиллиона', 'квинтиллионов'), # 10^18
+    ('секстиллион', 'секстиллиона', 'секстиллионов'), # 10^21
+    ('септиллион', 'септиллиона', 'септиллионов'), # 10^24
+    ('октиллион', 'октиллиона', 'октиллионов'), # 10^27
+    ('нониллион', 'нониллиона', 'нониллионов'), # 10^30
 ]
+
+_fractions = {
+    2: 'половина',
+    3: 'треть',
+    4: 'четверть',
+    5: 'пятая',
+    6: 'шестая',
+    7: 'седьмая',
+    8: 'восьмая',
+    9: 'девятая',
+    10: 'десятая',
+    # ...
+}
 
 def get_ones(digit, gender):
     if digit == 1:
@@ -36,8 +54,8 @@ def get_ones(digit, gender):
             return 'два'
     else:
         return _ones[digit]
-    
-    
+
+
 def get_scale(number, scale_index):
     if 10 < number % 100 < 20:
         return _scales[scale_index][2]
@@ -63,7 +81,22 @@ def convert_less_than_thousand(number, gender):
         else:
             return _hundreds[hundreds] + " " + convert_less_than_thousand(less_than_hundred, gender)
 
+def convert_fraction(numerator, denominator):
+    if numerator == 1:
+        return _fractions[denominator]
+    else:
+        return convert(numerator) + " " + _fractions[denominator] + ("" if numerator in [2,3,4] else "ых")
+
 def convert(number):
+    if isinstance(number, float):
+        integer_part = int(number)
+        fraction_part = round(number - integer_part, 10)
+
+        integer_words = convert(integer_part)
+        fraction_words = convert_fraction(int(fraction_part * 10), 10)
+
+        return f"{integer_words} целых {fraction_words}"
+
     if number == 0:
         return 'ноль'
 
