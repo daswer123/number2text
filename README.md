@@ -3,7 +3,7 @@
 Welcome to the Number2Text project! This Python package provides a convenient way to convert numbers into their textual representations in various languages. Whether you need to convert integers, floating-point numbers, or even fractions, Number2Text has got you covered.
 
 ## Interesting Fact
-*Coming soon!*
+*This library was written 90% using LLM agents, everything from writing the code to validating the result rests on the shoulders of LLMs*
 
 ## Features
 - Support for a wide range of languages (see the list below)
